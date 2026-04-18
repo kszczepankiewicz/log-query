@@ -8,7 +8,7 @@ const resetEl = document.getElementById('reset');
 formEl.addEventListener('submit', (e) => {
     e.preventDefault();
     debugger;
-    const value = constantTextEl.value + ' ' + inputEl.value;
+    const value = (constantTextEl.value + ' ' + inputEl.value).trim();
     outputEl.textContent += value + '\n';
     value = encodeURIComponent(value);
     navigator.clipboard.writeText(value).catch(() => alert('Not copied'));
