@@ -1,4 +1,6 @@
 'use strict';
+const LOCAL_STORAGE_ITEM_NAME = 'logs';
+
 const formEl = document.getElementById('form');
 const inputEl = document.getElementById('input');
 const constantTextEl = document.getElementById('constant-text');
@@ -22,9 +24,20 @@ resetEl.addEventListener('click', (e) => {
     }
     [inputEl, constantTextEl].forEach(el => el.value = '');
 });
-const getLogs = () => { };
 
+const setLogs = logs => localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, JSON.stringify(logs));
+const getLogs = () => {
+    const raw = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
+    if (!raw) return [];
+    let logs;
+    try {
+        logs = JSON.parse(raw);
+    } catch (error) {
+        return [];
+    }
+    if (!Array.isArray(logs)) return [];
+    return logs;
+};
 //saveToLocalStorage(newEntry)
-// setLogs(logs)
 // addTime(str) 
 
