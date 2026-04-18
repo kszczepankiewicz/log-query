@@ -10,9 +10,11 @@ const resetEl = document.getElementById('reset');
 formEl.addEventListener('submit', (e) => {
     e.preventDefault();
     const value = (constantTextEl.value + ' ' + inputEl.value).trim();
-    outputEl.textContent += value + '\n';
-    // getLogs();
-    // setLogs(logs)
+    // outputEl.textContent += value + '\n';
+    const logs = getLogs();
+    logs.push(value);
+    renderLogs(logs);
+    setLogs(logs);
     navigator.clipboard.writeText(value).catch(() => alert('Not copied'));
     window.open(`https://www.google.com/search?q=` + encodeURIComponent(value));
 });
@@ -25,6 +27,7 @@ resetEl.addEventListener('click', (e) => {
     [inputEl, constantTextEl].forEach(el => el.value = '');
 });
 
+const renderLogs = logs => outputEl.textContent = logs.join('\n');
 const setLogs = logs => localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, JSON.stringify(logs));
 const getLogs = () => {
     const raw = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
@@ -38,6 +41,9 @@ const getLogs = () => {
     if (!Array.isArray(logs)) return [];
     return logs;
 };
-//saveToLocalStorage(newEntry)
-// addTime(str) 
+
+renderLogs(getLogs());
+
+// addTime(str)
+// const removeLastLogFromLocalStorageEl = document.getElementById('remove-last-log-from-local-storage');
 
