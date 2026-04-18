@@ -28,6 +28,3 @@ const getLogs = () => { };
 // setLogs(logs)
 // addTime(str) 
 
-
-
-
