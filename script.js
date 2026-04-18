@@ -7,12 +7,12 @@ const resetEl = document.getElementById('reset');
 
 formEl.addEventListener('submit', (e) => {
     e.preventDefault();
-    debugger;
     const value = (constantTextEl.value + ' ' + inputEl.value).trim();
     outputEl.textContent += value + '\n';
-    value = encodeURIComponent(value);
+    // getLogs();
+    // setLogs(logs)
     navigator.clipboard.writeText(value).catch(() => alert('Not copied'));
-    window.open(`https://www.google.com/search?q=` + value);
+    window.open(`https://www.google.com/search?q=` + encodeURIComponent(value));
 });
 
 resetEl.addEventListener('click', (e) => {
@@ -22,8 +22,12 @@ resetEl.addEventListener('click', (e) => {
     }
     [inputEl, constantTextEl].forEach(el => el.value = '');
 });
+const getLogs = () => { };
+
 //saveToLocalStorage(newEntry)
-//handleApi()
+// setLogs(logs)
+// addTime(str) 
+
 
 
 
